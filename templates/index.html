@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversor de Divisas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Alumno A: fuente para la navbar y el logo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             background: linear-gradient(135deg, #1e3c72, #2a5298);
@@ -19,55 +23,123 @@
             font-weight: bold;
             color: #198754;
         }
+
+        /* ===== Alumno A: barra de navegación ===== */
+        .navbar-brand-custom {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .navbar-logo {
+            width: 38px;
+            height: 38px;
+        }
+        .navbar .nav-link {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+        .navbar .nav-link:hover {
+            color: #ffd166 !important;
+            transform: translateY(-2px);
+        }
+
+        /* Alumno A: distribución — tarjeta centrada bajo la navbar */
+        .main-area {
+            min-height: calc(100vh - 70px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 
-<body class="d-flex justify-content-center align-items-center vh-100">
+<body>
 
-    <div class="card shadow-lg p-4 converter-card" style="width: 400px;">
-        <h2 class="text-center mb-4">💱 Conversor de Divisas</h2>
+    <!-- ================= NAVBAR (Alumno A) ================= -->
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm"
+         style="background: rgba(15, 32, 63, 0.85); backdrop-filter: blur(8px);">
+        <div class="container">
+            <a class="navbar-brand navbar-brand-custom" href="/">
+                <!-- Logo en SVG (sin necesidad de archivo externo) -->
+                <svg class="navbar-logo" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="24" cy="24" r="22" fill="#ffd166"/>
+                    <path d="M16 18h12a5 5 0 0 1 0 10h-8m0 0l4 4m-4-4l4-4" stroke="#0f203f"
+                          stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                DivisaPro
+            </a>
 
-        <form method="post">
-            <div class="mb-3">
-                <label class="form-label">Cantidad</label>
-                <input type="number" step="0.01" name="amount" 
-                       class="form-control form-control-lg" 
-                       placeholder="Introduce cantidad" required>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navMenu" aria-controls="navMenu"
+                    aria-expanded="false" aria-label="Menú">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link active" href="/">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Tasas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Historial</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Acerca de</a></li>
+                </ul>
             </div>
+        </div>
+    </nav>
+    <!-- =============== FIN NAVBAR (Alumno A) =============== -->
 
-            <div class="row mb-3">
-                <div class="col">
-                    <select name="from_currency" class="form-select">
-                        <option value="EUR">EUR €</option>
-                        <option value="USD">USD $</option>
-                        <option value="GBP">GBP £</option>
-                    </select>
+    <div class="main-area">
+        <div class="card shadow-lg p-4 converter-card" style="width: 400px;">
+            <h2 class="text-center mb-4">💱 Conversor de Divisas</h2>
+
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Cantidad</label>
+                    <input type="number" step="0.01" name="amount"
+                           class="form-control form-control-lg"
+                           placeholder="Introduce cantidad" required>
                 </div>
-                <div class="col text-center align-self-center">
-                    →
-                </div>
-                <div class="col">
-                    <select name="to_currency" class="form-select">
-                        <option value="USD">USD $</option>
-                        <option value="EUR">EUR €</option>
-                        <option value="GBP">GBP £</option>
-                    </select>
-                </div>
-            </div>
 
-            <div class="d-grid">
-                <button type="submit" class="btn btn-primary btn-lg">
-                    Convertir
-                </button>
-            </div>
-        </form>
+                <div class="row mb-3">
+                    <div class="col">
+                        <select name="from_currency" class="form-select">
+                            <option value="EUR">EUR €</option>
+                            <option value="USD">USD $</option>
+                            <option value="GBP">GBP £</option>
+                        </select>
+                    </div>
+                    <div class="col text-center align-self-center">
+                        →
+                    </div>
+                    <div class="col">
+                        <select name="to_currency" class="form-select">
+                            <option value="USD">USD $</option>
+                            <option value="EUR">EUR €</option>
+                            <option value="GBP">GBP £</option>
+                        </select>
+                    </div>
+                </div>
 
-        {% if result is not none %}
-            <div class="mt-4 text-center result-box">
-                {{ result }}
-            </div>
-        {% endif %}
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        Convertir
+                    </button>
+                </div>
+            </form>
+
+            {% if result is not none %}
+                <div class="mt-4 text-center result-box">
+                    {{ result }}
+                </div>
+            {% endif %}
+        </div>
     </div>
+
+    <!-- Bootstrap JS: necesario para el menú desplegable de la navbar en móvil -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
